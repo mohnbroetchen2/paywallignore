@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block heading %}
+  <h2>Login</h2>
+{% endblock %}
+
+{% block content %}
+<br>
+{% if form.errors %}
+		<div style="display:flex; align-items: center;justify-content: center;">
+                    <p class=" label label-danger">
+                        Your username and password didn't match. 
+                        Please try again.
+                    </p>
+ 		</div>
+        {% endif %}
+	<div style="display:flex; align-items: center;justify-content: center;">
+	
+  		<form class="form-inline" role="form" method="post" accept-charset="utf-8">
+		<div class="form-group" style="margin-left:5px;">
+		    <label class="sr-only" for="inputUser">User</label>
+		    <input type="text" id="inputUser" placeholder="Username" class="form-control" name="username">
+		</div>
+		<div class="form-group" style="margin-left:5px;">
+		  <label class="sr-only" for="InputPassword">Password</label>
+		  <input type="password" id="InputPassword" placeholder="Password" class="form-control" name="password">
+		</div>
+  		{% csrf_token %}
+  		<button style="margin-left:5px;" type="submit" class="btn btn-success">Sign in</button>
+		</form>
+	</div>
+{% endblock %}
