@@ -52,7 +52,7 @@ def download_view(request):
                         for navhref in nav.find_all("a"):
                             href = navhref['href']
                             newhref= href.replace("/","_")
-                            messages.add_message(request, messages.INFO, 'newurl {}'.format(newhref))
+                            #messages.add_message(request, messages.INFO, 'newurl {}'.format(newhref))
                             #newtext = BeautifulSoup("+", "html")
                             #navhrefs.find(":").replace_with(newtext)
                             #messages.add_message(request, messages.INFO, 'newurl {}'.format(navhrefs))
