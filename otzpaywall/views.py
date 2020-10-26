@@ -73,7 +73,7 @@ def download_view(request):
                     full_file_path = os.path.join(settings.DOMAIN,file_path)
                     #return render(request,'show.html',{'url':full_file_path,})
                     return HttpResponseRedirect(full_file_path)
-        HttpResponseRedirect('/')
+        return HttpResponseRedirect('/{}'.format(file_path))
     except BaseException as e:
         messages.error(request, 'Fehler {} in Zeile {}'.format(e,sys.exc_info()[2].tb_lineno)) 
         return HttpResponseRedirect('/')
