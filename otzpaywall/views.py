@@ -60,6 +60,22 @@ def download_view(request):
                             ##text = navhrefs.replace_with(":","+")
                             #text = navhrefs.replace("https://otz","+")
                             #messages.add_message(request, messages.INFO, 'newurl {}'.format(text ))
+                        #soup.extract('obfuscated')
+
+                        for obfparagraph in soup.find_all("p", class_="obfuscated"):
+                            paragraphstring = str(obfparagraph.string)
+                            #messages.add_message(request, messages.INFO, 'leer: {}'.format(ord(paragraphstring[2])))
+                            new_string=""
+                            #new_string = temp_str.decode('utf-8')
+                            for i in range(len(paragraphstring)):
+                                if ord(paragraphstring[i]) != 32: # Leerzeichen auslassen
+                                    new_string += chr(ord(paragraphstring[i]) -1)
+                                else:
+                                    new_string += " "
+                            #new_string = paragraphstring
+                            obfparagraph.string = new_string
+                            del obfparagraph['class']
+
                         new_file_path =  os.path.join(settings.MEDIA_ROOT, nurl.pfile)
                         new_file = open(new_file_path, "x")   
                         new_file.write(soup.prettify())  
