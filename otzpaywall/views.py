@@ -80,16 +80,12 @@ def download_view(request):
                         new_file = open(new_file_path, "x")   
                         new_file.write(soup.prettify())  
                         new_file.close()
-                        file_path = new_file_path
+                        file_path = os.path.join(settings.MEDIA_URL, nurl.pfile)
+                        return HttpResponseRedirect(os.path.join(settings.DOMAIN,file_path))
                 else:
-                    file_path = os.path.join(settings.MEDIA_ROOT, nurl[0].pfile)
-                if os.path.exists(file_path):       
-                    #messages.add_message(request, messages.INFO, 'URL {}'.format(file_path))
-                    #return HttpResponseRedirect('/{}'.format(file_path))
-                    full_file_path = os.path.join(settings.DOMAIN,file_path)
-                    #return render(request,'show.html',{'url':full_file_path,})
-                    return HttpResponseRedirect(full_file_path)
-        return HttpResponseRedirect('/{}'.format(file_path))
+                    file_path = os.path.join(settings.DOMAIN,settings.MEDIA_URL, nurl[0].pfile)
+                    return HttpResponseRedirect(file_path)
+        return HttpResponseRedirect('/')
     except BaseException as e:
         messages.error(request, 'Fehler {} in Zeile {}'.format(e,sys.exc_info()[2].tb_lineno)) 
         return HttpResponseRedirect('/')
